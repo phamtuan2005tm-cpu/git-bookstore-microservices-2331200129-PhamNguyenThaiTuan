@@ -16,6 +16,13 @@ for (const [route, target] of Object.entries(apiRoutes)) {
   // TODO: Use the `createProxyMiddleware` to forward requests.
   // The configuration should include the `target` and `changeOrigin: true`.
   // Apply this middleware to the `app` for each route.
+  app.use(
+    route, 
+    createProxyMiddleware({
+      target: target,          // Đường mương dẫn nước đến (Ví dụ: http://frontend:3000)
+      changeOrigin: true       // Ép đổi nguồn nhận để Docker không chặn bảo mật
+    })
+  );
 }
 
 const PORT = 8000;
